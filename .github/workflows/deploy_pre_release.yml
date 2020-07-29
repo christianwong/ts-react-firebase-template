@@ -1,29 +1,32 @@
-name: Firebase Deploy
+name: Deploy pre-release
+
 on:
-  push:
-    branches:
-      - master
+  release:
+    types: [prereleased]
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - name: tag number
+        run : echo ${{ github.event.release.tag_name }}
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Install Dependencies
-        run: npm install
+        run: yarn
       - name: Run Tests
         env:
           CI: true
-        run: npm test
+        run: yarn test
       - name: Build
-        run: npm run build
+        run: yarn build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
           name: build
           path: build
+
   deploy:
     name: Deploy
     needs: build
@@ -39,6 +42,6 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting --project ${{ secrets.PROJECT_ID }}
+          args: deploy --only hosting --project ${{ secrets.PROJECT_STAGING_ID }}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
