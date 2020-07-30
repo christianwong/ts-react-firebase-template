@@ -60,5 +60,5 @@ jobs:
           firebase use ${{ secrets.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
           firebase target:apply hosting production ${{ secrets.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
 
-      - name: Deploy to staging site
-        run: firebase deploy --only hosting:staging --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m ${{ github.event.release.tag_name }}
+      - name: Deploy to production site
+        run: firebase deploy --only hosting:production --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m ${{ github.event.release.tag_name }}
