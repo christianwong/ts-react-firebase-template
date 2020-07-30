@@ -69,7 +69,7 @@ jobs:
       #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Deploy to staging site
-        run: firebase deploy --only hosting:staging --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }} Tag version ${{ github.event.release.tag_name }}"
+        run: firebase deploy --only hosting:staging --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m ${{ github.event.release.tag_name }}
 
       - name: Archive build Artifact
         uses: actions/upload-artifact@master
