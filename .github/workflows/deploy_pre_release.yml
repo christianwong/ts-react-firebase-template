@@ -59,6 +59,7 @@ jobs:
         run: |
           mv build/firebase.json .
           firebase use ${{ secrets.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
+          firebase target:apply hosting staging ${{ secrets.PROJECT_STAGING_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
 
       # - name: Deploy to Firebase
       #   uses: w9jds/firebase-action@master
