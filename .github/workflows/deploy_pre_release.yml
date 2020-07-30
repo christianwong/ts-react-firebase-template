@@ -27,6 +27,9 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Backup Firebase configurations
+        run: mv firebase.json build/
+
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
@@ -53,7 +56,9 @@ jobs:
           path: build
 
       - name: Set up project
-        run: firebase use ${{ secrets.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+          mv build/firebase.json .
+          firebase use ${{ secrets.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
 
       # - name: Deploy to Firebase
       #   uses: w9jds/firebase-action@master
