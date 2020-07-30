@@ -7,4 +7,4 @@ Template for base Typescript based React APP deployed in Firebase using GitHub A
 
 After "Use this template", follow these steps:
 1. Update Badge URL to your new project.
-1. Go to Settings > Secrets and set FIREBASE_TOKEN, PROJECT_ID and PROJECT_ID.
+1. Go to Settings > Secrets and set FIREBASE_TOKEN, PROJECT_ID and PROJECT_STAGING_ID.
